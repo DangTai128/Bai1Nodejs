@@ -1,5 +1,7 @@
 # Đặng Anh Tài
 ## Mã sinh viên: 22810310385
 ## Bài: Validate form
-![Kết quả](hợplệ.jpg)
-![Kết quả](khônghợplệ.jpg)
+### Trường hợp không hợp lệ
+![Kết quả](anh1.jpg)
+### Trường hợp hợp lệ
+![Kết quả](anh2.jpg)
