@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Home from './Home' ;
 
-const PhoneNumberValidation = () => {
+const Stack = createStackNavigator();
+
+const PhoneNumberValidation = ( {navigation} ) => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -12,13 +17,18 @@ const PhoneNumberValidation = () => {
 
     if (phoneRegex.test(phone)) {
       setErrorMessage('Số điện thoại hợp lệ!');
+      return true;
     } else {
       setErrorMessage('Số điện thoại không hợp lệ!');
+      return false;
     }
   };
 
   const handleButtonPress = () => {
-    validatePhoneNumber(phoneNumber);
+    if(validatePhoneNumber(phoneNumber))
+    {
+      navigation.navigate('Home');
+    };
   };
 
   return (
@@ -43,13 +53,13 @@ const PhoneNumberValidation = () => {
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={{fontSize: 25, fontWeight: '700'}}>Đăng nhập</Text>
-      </View>
-      <PhoneNumberValidation />
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName = "PhoneNumberValidation">
+        <Stack.Screen name = "Đăng nhập" component = {PhoneNumberValidation}/>
+        <Stack.Screen name = "Home" component = {Home} />
+      </Stack.Navigator>
+      <StatusBar style='auto'/>
+    </NavigationContainer>
   );
 }
 
@@ -76,8 +86,8 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
   },
   button: {
-    marginTop: 250,
-    backgroundColor: '#ccc',
+    marginTop: 150,
+    backgroundColor: '#aaa',
     paddingVertical: 20,
     borderRadius: 10,
     alignItems: 'center', 
